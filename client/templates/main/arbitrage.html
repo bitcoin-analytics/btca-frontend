@@ -1,0 +1,51 @@
+<div class="ui-helper-clearfix">
+<div class="arbitrage-currency-tabs" id="arbitrage-currency-tabs" style="width:372px; float:left">
+{{each $data['currencyTickers']}}
+    <input type="radio" id="aribitrage-currency-${$index}" xcur="${$index}" name="arbitrage_currency" class="marketcharts-radio" /><label for="aribitrage-currency-${$index}">${$index}</label>
+{{/each}}
+</div>
+<div id="arbitrage-volume-tabs" style="width:363px; float:left">
+{{each $data['volumes']}}
+    <input type="radio" id="arbitrage-volume-${$index}" xvol="${$index}" name="arbitrage_volume" class="marketcharts-radio" /><label for="arbitrage-volume-${$index}">${$index}</label>
+{{/each}}
+</div>
+</div>
+
+<div id="arbitrage-warning" class="ui-state-error ui-corner-all" style="padding: 0.7em; max-width: 40em; margin: 1em auto">
+    <p><span class="ui-icon ui-icon-alert" style="float: left; margin-right: .3em;"></span>
+    <strong>Subscription is not active</strong> arbitrage data is delayed by 6 hours. Orderbooks and charts are not delayed.</p>
+</div>
+
+<div style="width: 1250px; float:left;">
+    <div style="float:left; width:50%;">
+        <div id="arbitrage-table-all"></div>
+        <div id="arbitrage-table"></div>
+    </div>
+    <!--div id="arbitrage-orderbook"></div-->
+</div>
+<div class="clear" style=" margin-bottom: 20px;"></div>
+<div class="chartcontainer" id="arbitrage-obarbpercent-container">
+    <div id="legend-obarbpercent" class="legend"></div>
+    <div id="arbitrage-obarbpercent" class="marketchart" ></div>
+    <div calss="clear"> </div>
+</div>
+<div class="clear" style=" margin-bottom: 20px;"></div>
+<div class="chartcontainer">
+    <div id="legend-arbpercent" class="legend"></div>
+    <div id="arbitrage-arbpercent" class="marketchart" ></div>
+    <div calss="clear"> </div>
+</div>
+<div class="chartcontainer">
+    <div id="legend-mktexecprice" class="legend"></div>
+    <div id="arbitrage-mktexecprice" class="marketchart" ></div>
+    <div calss="clear"> </div>
+</div>
+<div class="chartcontainer">
+    <div id="legend-ap2sb" class="legend"></div>
+    <div id="arbitrage-ap2sb" class="marketchart" ></div>
+    <div calss="clear"> </div>
+</div>
+<div style="width: 1250px; float:left; margin-top: 20px;">
+    <div id="arbitrage-orderbook"></div>
+</div>
+<div class="clear" style=" margin-bottom: 20px;"></div>

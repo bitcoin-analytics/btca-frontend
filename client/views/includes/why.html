@@ -1,0 +1,334 @@
+		<ul>
+			<li><a href="#how-it-works">How it works?</a></li>
+			<li><a href="#why-bitcoin-analytics">Why Bitcoin Analytics?</a></li>
+			<li><a href="#how-is-it-built">How is it built?</a></li>
+			<li><a href="#illiquid-markets">Illiquid markets</a></li>
+			<li><a href="#liquidity-suppliers">Activity of Liquidity Suppliers</a></li>
+			<li><a href="#liquidity-demanders">Activity of Liquidity Demanders</a></li>
+			<li><a href="#arbitrage-explained">Arbitrage tables</a></li>
+			<li style="display: none"><a href="#other">other</a></li>
+		</ul>
+		<div id="how-it-works" class="multi-columns">
+			<h1>How it works</h1>
+			<p>On this page we quickly explain how to use this service. For in-depth information see "How it is built?" tab.</p>
+			<h2>Getting Started</h2>
+			<p>It takes up to 10 seconds to fully load the charts, so be patient and watch the progress indicator in the top right corner near the logo.
+ 			The status should display "Receiving chart data", then "Drawing charts" and then your login status ("Not logged in" or "Logged in as ...").
+			</p>
+			<h2>Free and Paid service</h2>
+			<p>Although full data set of indicators is provided in paid version, we provide limited set of indicators 
+				and delayed arbitrage charts free of charge to give an idea of what you can get as a paid customer.
+			</p>
+			<h2>Signing In</h2>
+			<p>To subscribe, you need to login first. We don't use passwords as social login is more secure. Go to "Login and Subscribe" tab and use your Twitter, 
+			Facebook or Google account to login. If you don't like the idea of social login you can get a new account at http://myopenid.com and use it to login.
+			</p>
+			<h2>First Payment</h2>	
+			<p>When your status becomes "Logged in as... ", go to Configure tab, click you subscription plan button and send exact amount of BTC to that assigned bitcoin address.</p> 
+			<p>It usually takes from 30 minutes to 1 hour to activate your subscription. Wait for some time and reload the page. 
+			Check Configure tab to see if your subscription was activated.
+			</p>
+			
+			<h2>Using Charts</h2>
+			<h3>Time synchronization</h3>
+			<p>Charts are ordered to display indicators synchronously. So you can analyse price movements with corresponding changes in orderbooks and trading volumes.
+			</p>
+			<h3>Zoom In/Out</h3>
+			<p>You can use mouse to increase detalization of the chart. Just drag part of the chart to zoom in and double click to zoom out. Try several times to play with it.
+			Also you can use zoom window on the last chart. When you zoom in/out on one chart you change zoom for all of them.</p>
+			
+			<h3>10, 100, 1000, ...</h3>
+			<p>Charts are calculated depending BTC volume we want to sell/buy. Different volume means different prices and different behaviour.</p>
+			
+			<h2>Arbitrage tables</h2>
+			<p>Arbitrage tables are calculated depending on BTC volume. They are recalculated every 15 seconds. In details you can read further "Arbitrage tables" tab explanation.</p>
+			
+			
+			<h2>Business Experiment</h2>
+			<p>From the very beginning we assume this service as a business.
+					The idea of this business experiment must be supported by customers in order to give us financial signals
+					and incentives to further develop and improve the service and help grow overall understanding of the Bitcoin market among users and traders,
+					and thus improve the bitcoin free market experiment itself.</p>
+			
+			<h2>Thank you for your trust</h2>
+			<p>Regardless of whether you are a guest or a paying member of our site, we value your attention. Please do not hesitate to ask questions, or to leave feedback on how we may improve our service, in <a href="https://bitcointalk.org/index.php?topic=82768.0" target="_blank">Help & Feedback</a>.</p>
+			
+				
+		</div>
+		<div id="why-bitcoin-analytics" class="multi-columns">
+			<h1>Why Bitcoin Analytics?</h1>
+			<p>
+				We value Bitcoin. We think that Bitcoin has value. That is why we started this project.
+			</p>
+			<p>
+				Our project is a business and as an all-new entrepreneurial idea it
+				is an experiment, as it is Bitcoin itself.</p>
+			<p>
+        This project is an
+				experiment from many points of view: it is Bitcoin promotion and
+				an attempt to provide a useful tool which we as Bitcoin
+				users and traders want for ourselves; it is an experiment
+				in economics, learning, understanding and practicing different
+				mainstream and non-mainstream economical schools and ideas; it is also
+				an interesting technical experiment for us as software developers.
+			</p>
+			<p>
+				What does it mean for you as for users and customers of the business
+				service which is in its early establishment state? It means that from
+				the very beginning you will experience all problems we will have,
+				especially technical. The only excuse we have is that Bitcoin
+				technology itself is in its infancy and we hope for your understanding
+				and generosity.
+			</p>
+			<p>
+				From our side we pledge our time and efforts to provide you with a service
+				more valuable for you than the amount of Bitcoins you spent on it.
+			</p>
+		</div>
+		<div id="how-is-it-built" class="multi-columns">
+			<h1>How is it built?</h1>
+			<p>The server collects order books from exchanges and trades from bitcoincharts.com, 
+				calculates the charts from raw data and pushes the data to connected clients in real time.	
+				Below is a brief explanation of technical details.</p>
+			<h2>Collector subsystem - Server part</h2>
+			<p>The server requests order books from 12 Bitcoin exchanges every 15 seconds. 
+ 				We decided to focus our efforts on USD exchanges: mtgox.com, btc-e.com, 
+				btcex.com, CampBX.com, cryptoxchange.com, intersango.us, www.bitstamp.net, bitfloor.com, 
+				ruxum.com, vircurex.com. The collector allows us to add new exchanges without 
+				technical difficulties. We plan to add non USD exchanges 
+				at some point in the future.</p>
+			<p>Trading information is requested from bitcoincharts.com.
+      Normally trading data propagates almost instantly as trades are executed. However, sometimes
+			bitcoincharts.com provides trade data several minutes after the actual trades, or trade data
+			appear out of order. Our algorithm accounts for these effects and correctly synchronizes charts in browsers.
+			So sometimes parts of the charts are recalculated, resent and redrawn as data for old trades arrived.</p>
+ 			
+			<p>Currently we display only 24 hours of data with 15 seconds granularity, but we plan to add a 
+				2 months view with 15 minutes granularity soon.</p>
+			
+			<h2>Real Time Charts Visualization - Client part</h2>
+			<p>The web site is technically a one-page web application - it means we don't have page reloads so you can
+				switch between charts instantly to compare them. Chart drawing is slow on netbooks, but our measurements 
+				show there is space for improvements, so zooming and panning will get faster over time as our service matures.</p>
+				
+			<p>We see our website as an analytical tool that visualizes trading activity on exchanges.
+			To add details, we distinguish between sides of a trade when it makes sense. This means splitting of market activity into
+  			buying and selling and into liquidity supply and liquidity demand.
+			
+			Each pair is calculated depending on predefined trading volume.
+      To have various focus of analyses there are a set of predefined trading volumes of 10, 100, 1000, 10000 and 100000 BTC.
+      Five pairs of indicators are calculated for each exchange to allow to compare trading activity among different exchanges.
+      <br/>
+      To switch between different exchanges and between predefined trading volumes two independent controls can be used
+      to focus attention on one exchange and one trading volume scale at a time.
+      <br/>
+      The whole set of indicators per exchange and per trading volume is calculated for every time slot and presented in bid/ask charts.
+	  </p>
+      <h2>allUSD Ticker</h2>
+      <p>The 'allUSD' ticker is a consolidated view of all exchanges. The indicators are calculated for allUSD the same way, as if it was a real exchange.</p>
+			
+	  <p>The order book of this composite exchange is just a standard consolidated limit order 
+		  book compiled of all supported exchanges - that is, limit orders on all exchanges 
+		  joined together and ordered by their respective limit price. The consolidated trade stream is just trades on all exchanges 
+		  joined together and ordered by execution time stamp.</p>
+	  <p>The computed charts for allUSD provide insights of what happens at Bitcoin market as a whole. For the first time it is 
+		  possible to see how activity on any particular exchange differs from the market in general.
+		  Without saying that consolidated order book can show which arbitrage opportunity actually available depending on trading volume of the whole market
+		  and how it changed over time.</p>
+	  <p>For example, by comparison of mtgoxUSD and allUSD you can see if MtGox is dominating the market
+ 	  	  at the moment. For 10000 it almost always is, but if you want to trade less than 100 BTC, the best available price is almost certainly
+		  a second-grade exchange having enough volume. 		  
+	  </p>
+	  <p>In most cases the benefit from selecting the right exchange and the right trade execution strategy financially outweighs our 
+		  moderate subscription cost - so if you trade Bitcoins often, think of supporting us, so we can develop more visualizations and
+		  analytical tools and add more exchanges.</p>
+	</div>
+		<div id="illiquid-markets" class="multi-columns">
+			<h1>Illiquid markets</h1>
+			<p>Bitcoin markets are illiquid markets with relatively low volumes where price for market orders varies significantly depending on demanded volume. Implying illiquidity of bitcoin markets, traditional tickers of best bid and ask prices are not relevant for practical trading. </p>
+			<h2>Market Order Execution Price (MKT Exec Price)</h2>
+			<p>To help assessing price for the given volume of bitcoins, exchanges provide with so called Level 2 Market Data,
+ 				including full anonymized order books. It is now possible to answer the question what is market price of the given order volume. </p>
+			<p>Bitcoin exchanges have somewhat non-standard notion of market order. They assume that market order allows one to buy given volume of a financial instrument at its current price.
+ 				
+			However, a widely accepted definition is that market order buys you a given volume at its best available price without respect to the price.</p>
+			<p>The difference is tremendous. For example, a genuine market order for 10000 BTC on MtGox will be executed immediately and it will shift the price a lot, so the resulting
+ 				average price (the execution price) will be much worse than the current price. However, with current implementation of market orders 
+				when you choose to place a market order, you are suggested current price, which is not what you will actually get.
+				
+				We checked all of the 12 which declare an MKT capability.
+			</p>
+			<p>The current implementations assume infinite liquidity which is the case neither at MtGox (talk less of smaller exchanges) not on really big exchanges such as NYSE.</p>
+      		<p>So our system provides MKT Execution Price chart. To calculate the price, we go deeper and deeper in order book until we fetch the declared volume (e.g. 1000 BTC).
+			Then we divide total BTC by total USD, get the actual market price for a given volume and display how it varies with time.</p>
+			
+			<p>Note that the system also accounts for limited volume of order books. Sometimes you cannot trade 1000 BTC at all because 
+				there are not enough offers from liquidity suppliers. Sometimes you can, but most of this 1000 will be spam orders at very
+				unattractive prices. Our chart reflects these phenomena.
+			</p>
+			
+			<p>Our idea is to calculate such market price for pretty arbitrary a set of volumes: 10, 100, 1000, 10000 btc. We assume that although for 
+				practical trading prices for different volumes have to be calculated, these selected volumes allow quick analyzes of the prices
+ 				distribution and volume capacity on the given market.</p>
+	
+			<h2>Bid and Ask separation</h2>
+			<p>Additional step toward Level 2 Market Data implies a possibility to analyze market activity separately for buyers and 
+				sellers. Thus separating dynamics of bid and ask allows deeper understanding of the market.</p>
+		</div>
+		
+		<div id="liquidity-suppliers" class="multi-columns">
+			<h1>Liquidity Suppliers and Liquidity Demanders</h1>
+			<p>Traders perform two different roles with regard to liquidity.</p>
+			<p>On one side, there are traders, buyers and sellers, who provide resources for exchange – liquidity providers.</p>
+			<p>And on the other side, there are traders who are willing to consume those resources provided for exchange – liquidity demanders.</p>
+			<p>Depending on the current role of the trader his goals will differ as well as his behavior.</p>
+			
+			<h1>Activity of Liquidity Suppliers</h1>
+			<p>Currently we assume two main indicators which illustrate activity of liquidity suppliers.</p>
+	
+			<h2>Order Book Volume BTC/USD</h2>
+			<p>A market can be considered as two groups of traders standing in front of each other.
+ 				On one side there are buyers who have USD and want to buy BTC. On the other side there are
+				sellers who have BTC and want to sell them for USD. Thus current order book volume can be 
+				measured by summing up all USD on the buyers side and all BTC on the sellers side.</p>
+			
+			<p>It is their dynamics which can be considered activity of liquidity suppliers.</p>
+			
+			<p>Note that special care should be taken to separate 'real' data from 'noise' and 'spam'. Let's say you want to
+				sell 1 BTC for 1,000,000 USD and place such limit order. What is order book volume? The order book volume is certainly not 1 million dollars - 
+				these dollars are an illusion which materializes only when the order executes. And in this case the order will never materialize because
+				of such a grandiose price. On the other hand, if you have 1 dollar and want to buy 1,000,000 USD for it - it is 1 BTC which is real, and 1,000,000 USD
+				which is illusory. That's why we display order book volume in USD and BTC instead of converting them into a common dimension. In fact, order 
+				books provide no information to perform such conversion.
+			</p>
+
+			<h2>Market Order Price to Sell/Buy given Volume (XXX BTC MKT Exec Price)</h2>
+			<p>In contrast with traditional exchanges, bitcoin exchanges do not require high entry price for a trader. Thus on one exchange there are traders who just occasionally sell or buy, small amount of BTC (10 BTC) for respectively small amount of USD (50 USD). Such trades usually executed hundred and thousand times in 24 hours on MtGox.</p>
+			<p>On the other hand there can be powerful traders who operate with much larger sums of BTC (1000 – 1000 BTC). Such trades are executed 2-3 times in 24 hours on MtGox.</p>
+			<p>Both groups will ask different questions about the price prevailing on the current market depending on preferred order amounts operated by the trader.</p>
+			<p>Buyer will be interested in current market price to buy 10, 100, 1000, 10000 amount of BTC depending on his strategy and financial resources at hand. The same will be with Seller who will be interested in current market price to sell 10, 100, 1000, 10000 BTC.</p>
+			<p>Order books provide us enough data to calculate bid and ask prices for given BTC volumes. Gathering historical bids and asks for given BTC volumes, allows to analyze price valuations distributed in time and depending on the BTC volumes available  for trading. Thus activity of liquidity suppliers can be further illustrated.</p>
+		</div>
+
+		<div id="liquidity-demanders" class="multi-columns">
+			<h1>Activity of Liquidity Demanders</h1>
+			<p>Our understanding of the market will be incomplete without knowing activity of liquidity demanders. Contrary to the activity of liquidity suppliers, which can be gathered from order books, volumes of BTC trades actually executed on the exchange represent activity of liquidity demanders. Using trading data allows us to calculate various indicators which can possibly effectively illustrate liquidity demander’s behavior on the given market. These indicators can help us answer following set of questions. </p>
+			<p>What actual trading activity pattern prevailed recently on the market? At any given moment selling activity can prevail, and at the next period of time buying activity can prevail. </p>
+			<p>What actual amounts of BTC prevail in the current selling or buying activity?</p>
+			<p>What time can be expected to successfully sell/buy a given BTC amount on the market? And at what actual price given BTC amount could be bough/sold?</p>
+			
+			<h2>Time Given Volume Was Sold/Bought (Time Last XXX BTC Traded)</h2>
+			<p>Let’s take 10 BTC volume for analysis. For every new time slot we calculate sum of all sells/buys respectively going back in time until the sum of 10 traded BTC (sold/bought) is reached. Then we stop summing and calculate time which was actually needed on the market to sell/buy respectively 10 BTC. If we take a look on Mtgox charts we can see that it has relatively high trading activity in volumes of 10 BTC or below. Let’s assume that throughout the 24 hour period in general time to sell/buy 10 BTC did not exceed 16-minutes. And for 1000 BTC this time in general can exceed 3-4 hours in a last 24 hour period. Although, for any given period of time and market state this indicator can significantly vary, we still can make comparison between different trading activities, depending on volumes which were traded.</p>
+			<p>This is an experimental indicator which we assume can show what variety of indicators in general can be provided by our service. It is easy to imagine that if in general on the market small traders activity is prevailing over big traders activity then we can expect that relatively small volumes below 10 BTC will be traded much frequently than bigger amounts of 1000 BTC and above.</p>
+			<p>The same indicator can be used to compare trading activity among different exchanges.</p>
+			<h2>Average Price Given Volume Was Sold/Bought At (VWAP Last XXX BTC Traded)</h2>
+			<p>Let’s again take 10 BTC volume for example analysis. For every new time slot we calculate sum of all sells/buys respectively going back in time until the sum of 10 traded BTC (sold/bought) is reached. Then we stop summing and calculate the whole amount of USD was traded against last 10 BTC. Then we divide sum of all USD by sum of 10 BTC traded and find the average price of last BTC sold/bought on the market. If we take a look at Mtgox charts we can notice that 10 BTC trades can move the price significantly, but it is obvious that 1000 BTC trades can outperform those price changes from relatively small trades. Or if general amount of 10 BTC trades is prevailing on the market then at some point they can influence general market more than relatively infrequent big trades. </p>
+			<p>Also for any given period of time and market state this indicator can be significantly different, it still allows us make a comparison between different trading activity, depending on volumes and between different exchanges.</p>
+			<p>This is an experimental indicator.</p>
+			<br/>
+			<br/>
+			<h2>Volumes Actually Sold/Bought On the Market (Trade Volume)</h2>
+			<p>This is a standard indicator which as actually does cannot be differentiated by the predefined volume and its only difference as with all our indicators is separation between volumes sold and bought on the current market.</p>
+			<h2>Sells and Buys Separation</h2>
+			<p>Currently bitcoincharts.com do not provide us with all necessary information about actual direction of trades.
+      Although we know that mtgox provides trade type in its experimental websocket api interface, we decided not to implement it
+      for the first stage of this service for several reasons. Websocket interface is provide only for mtgox, and until recently it had issiues with reliablity.
+      On the next stages of development we consider using weboscket interface.
+      And we hope that in the near future all major exchanges will be providing this very valuable information.
+      But until then we can empirically separate trades using currently available order books best bid and best ask prices as a reference.
+      Our idea is simple: to calculate the median price between best bid and best ask for any new time slot.
+      Then each trade in this time slot can be compared against this median price and those trades with price below median price
+      can be assumed as selling activity and those which equal or above the median price can be assumed as buying activity.
+      We understand that at some very narrow bid/ask spread and quick price moves there can be some errors,
+      but in general they will be insignificant although unavoidable until data providers will start providing exact trading information.</p>
+		</div>
+		<div id="arbitrage-explained" class="multi-columns">
+			<h1>Arbitrage tables</h1>
+		<p>	
+			The table displays arbitrage opportunities for lots of 10, 100, 1k, 10k and 100k BTC between different USD markets. 
+		</p>	
+		<p>	
+			The table looks similar to http://nyse-group.de/bitcoin-arbitrage and other existing tables, but it has something different under the hood:
+		</p>	
+		<p>	
+			1. It doesn't display an opportunity if there's too little volume offered at a pair of exchanges. 
+		</p>	
+		<p>	
+			You can see our arbitrage table shrinking as you increase the volume. For example, only 3 exchanges have 10k BTC in their order books: btceUSD, cryptoxUSD and mtgoxUSD.  
+		</p>	
+		<p>	
+			2. It displays market order execution prices for corresponding volume instead of best prices. 
+		</p>	
+		<p>	
+			In most cases, very little volume is offered at the best price - so if MtGox ticker says 5.3, it doesn't mean that you can buy or sell 1000 coins at that price. Our arbitrage
+			calculator accounts for that by going deeper in the orderbook than best price and displaying you the real volume weighted average price between several orderbook entries.
+		</p>	
+		<p>	
+			So you can see prices for arbitrage between mtgoxUSD and btceUSD (for example) varying with volume.
+		</p>	
+		<p>	
+			3. We extended the usual color coding from 2 to 4 colors:
+		</p>	
+		<p>	
+			- orange means there is positive price difference - you can buy low at one exchange and sell high at another one (but beware transaction fees and other commissions!)
+			- yellow means there is no arbitrage and negative bid-ask price difference is less than 10% - that is, market is efficient.
+			- white means there is no arbitrage but price difference is more than 10% - it means there is a market making opportunity, you can try to make money by putting limit orders at these two exchanges
+			- black means there's not enough volume on one of the exchanges
+		</p>	
+		<p>	
+			The 10% threshold is based on our subjective feeling of illiquidity and is more or less arbitrary.
+		</p>	
+		<p>	
+			4. At the top of the table you see best available execution price for the lot. You can use the percentage as a measure of bitcoin markets efficiency. The square is usually orange - so best bid usually is higher than best ask because of inefficiencies! But it's rather hard to capitalize on this difference as it requires a complicated execution strategy and will probably be eaten by different fees.  
+		</p>	
+		<p>	
+			The free version of arbitrage table is delayed by 6 hours - it shows quotes 6 hours from now. The paid version (available after you subscribe with a modest fee) shows realtime quotes (fetched from exchanges using their orderbook API every 15 seconds and updated using web sockets just like the charts).
+		</p>	
+		<p>	
+			Also note, that these days arbitrage opportunities only happen during price swipes, so keep watching 
+		</p>	
+		<p>	
+			Good luck in your profit seeking!			
+		</p>	
+			</div>
+<!--		
+		<div id="other" class="multi-columns">
+		 <h1>BTC1000 index</h1>
+		 <p>The BTC1000 Index is the best price one can sell or buy 1000 bitcoins by simultaneously placing market orders
+		 at many different exchanges. Two values are computed: BTC1000 Bid and BTC1000 Ask.</p>
+
+		 <p>Imagine someone needs to buy 1000 bitcoins by placing a market order (as opposed to a limit order).
+		 Different order execution strategies are possible, ranging from least effective to most effective (i.e. best price):</p>
+
+		 <ol>
+			<li>To place an order at MtGox because it's the largest exchange and the most obvious choice.</li>
+			<li>To find out which exchanges are liquid enough to have 1000 bitcoins in limit orders (usually MtGox and TradeHill thUSD)
+				and choose the one with best integrated price for 1000 coins.</li>
+			<li>To split the order volume optimally between all exchanges and skim the best limit orders off tops of
+				all exchanges.</li>
+		 </ol>
+
+		 <p>The optimal spltting is straightforward to compute. Just join bid orderbooks from different exchanges together, compute
+			 the integrated price for 1000 coins and split orders back according to their origin exchange. The resulting computed
+			 strategy will look like this:</p>
+
+		 <ul>
+			 <li>Place an ask market order for 830 coins at mtgoxUSD</li>
+			 <li>Place an ask market order for 123 coins at thUSD</li>
+			 <li>Place an ask market order for 30 coins at b7USD</li>
+			 <li>Place an ask market order for 15 coins at thLRUSD</li>
+			 <li>Place an ask market order for 2 coins at btcexUSD</li>
+		 </ul>
+
+		 <p>An optimal order equalizes prices on different markets and thus is useful for bitcoin economy.</p>
+
+		 <p>Percentage shares of different exchanges in BTC1000 are a useful measure of relative liquidity of the
+			 participating exchanges.</p>
+
+		 <p>The BTC1000 index itself is a measure of real value of bitcoin.</p>
+
+		 <p>1000 bitcoins is an arbitrarily taken volume. We wanted a round number and as many bitcoins as possible because larger
+		  volumes represent bitcoin value for larger businesses. 100 bitcoins was too small (~$1k at current rates)
+		  and 10000 is too large because that volume is only available on MtGox.</p>
+		</div>
+-->

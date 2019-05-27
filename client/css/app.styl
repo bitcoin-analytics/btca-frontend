@@ -1,0 +1,88 @@
+// Example Stylus file
+// All changes are detected and automatically compiled into CSS
+
+// @import 'helpers
+
+// Main
+
+*
+  margin 0
+  padding 0
+
+html
+body
+  height 95%
+body
+  font-family Arial,sans-serif
+  font-size 10px
+  margin 0 auto
+  width 95%
+  background-color #000000
+  padding 6px 10px 2px
+
+#wrap
+  padding-right 10px
+  
+#header
+#footer
+  margin 5px 10px 5px 0
+  padding 4px 6px 4px 16px
+  height 26px
+#footer
+  margin 5px 10px 5px 0
+  padding 0 6px 0 6px
+  
+#header #themeswitcher
+  margin 2px 0
+
+#header #title
+  float left
+  margin-right 10px
+
+#header #title a
+  text-decoration none
+
+#uptime
+#last_updated
+#help_feedback
+  width 200px
+  float left
+  line-height 26px
+  vertical-align middle
+  
+#help_feedback
+  float right
+  width auto
+
+#tabs .ui-tabs-panel
+  min-height 500px
+  
+#why .multi-columns
+  max-width 70em
+  text-align justify
+  -webkit-column-width 30em
+  -moz-column-width 30em
+  -webkit-column-gap 2em
+  -moz-column-gap 2em
+  column-width 30em
+  column-gap 2em
+
+#why .multi-columns p
+  margin-bottom 1em
+
+
+@import 'tabs'
+
+@import 'instant-arbitrage'
+
+@import 'new-2x2-layout-tabs'
+
+@import 'dycharts'
+
+@import 'configure'
+
+@import 'orderbook'
+
+@import 'depthchart'
+
+@import 'xarbitrage'

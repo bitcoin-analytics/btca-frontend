@@ -1,0 +1,36 @@
+!!! html
+html
+	head
+		title Bitcoin realtime charts for order book, trades and arbitrage opportunities.
+		meta(name='description', content='All major USD, EUR, GBP, CNY exchanges. Historical market and limit order execution prices corrected for volume. VWAP. Indicators to account for low liquidity and thin markets. Realtime arbitrage tables.')
+		link(rel='stylesheet', type='text/css', media='all', href='/jquery-ui-1.10.4.custom/css/ui-darkness/jquery-ui-1.10.4.custom.min.css')
+		meta(http-equiv='content-type', content='text/html; charset=utf-8')
+		meta(name='keywords', content='bitcoin charts, indicators, trends')
+		meta(name='author', content='')
+		script(type='text/javascript')
+				var _gaq = _gaq || [];
+				_gaq.push(['_setAccount', 'UA-30415639-1']);
+				_gaq.push(['_trackPageview']);
+				(function() {
+				var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
+				ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
+				var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
+				})();
+		script(type='text/javascript')
+				(function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+				(i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+				m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+				})(window,document,'script','//www.google-analytics.com/analytics.js','ga');
+				
+				ga('create', 'UA-30415639-2', 'bitcoin-analytics.com');
+				ga('send', 'pageview');
+		!= SocketStream
+	body
+		#wrap.ui-helper-clearfix
+				include includes/tabs
+		#footer.ui-widget-header.ui-corner-bottom.ui-widget
+			#uptime
+			#last_updated
+			#help_feedback
+				a(href="https://bitcointalk.org/index.php?topic=82768.0", target="_blank") Help &amp; Feedback
+			.ui-helper-clearfix

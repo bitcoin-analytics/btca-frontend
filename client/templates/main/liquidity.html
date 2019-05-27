@@ -1,0 +1,29 @@
+<div class="ui-helper-clearfix">
+<div class="liquiditycharts-currency-exchanges-tabs" id="liquiditycharts-currency-exchanges-tabs" style="width:500px; float:left">
+{{each $data['currencyTickers']}}
+    <input type="radio" id="liquiditycharts-currency-exchange-all${$index}" xidx="all${$index}" xcur="${$index}" name="liquiditycharts-exchange" class="liquiditycharts-radio" /><label for="liquiditycharts-currency-exchange-all${$index}">all${$index}</label>
+{{/each}}
+</div>
+</div>
+{{each $data['currencyTickers']}}
+<div class="liquiditycharts-exchanges-tabs" id="liquiditycharts-exchanges-tab-${$index}" style="height: 53px">
+{{each $value}}
+    <input type="radio" id="liquiditycharts-exchange-${$value}" xidx="${$value}" name="liquiditycharts-exchange" class="liquiditycharts-radio" /><label for="liquiditycharts-exchange-${$value}">${$value}</label>
+{{/each}}
+</div>
+{{/each}}
+<div class="chartcontainer" style="background-color:white; height:300px;">
+    <div id="liquiditycharts-legend" class="legend"></div>
+    <div id="liquiditycharts" class="depth-chart" ></div>
+    <div calss="clear"> </div>
+</div>
+<div class="depthchartcontainer" style="background-color:white;">
+    <div id="legend-mktdepth-chart" class="legend legend-depth-chart"></div>
+    <div id="mktdepth-chart" class="depth-chart" ></div>
+    <div calss="clear"> </div>
+</div>
+<!--div class="chartcontainer">
+    <div id="liquiditycharts-legend-btcAll" class="legend"></div>
+    <div id="liquiditycharts-btcAll" class="marketchart" ></div>
+    <div calss="clear"> </div>
+</div-->

@@ -1,0 +1,121 @@
+  <h1></h1>
+  <div id="configure-address-migration-warning" class="ui-state-error ui-corner-all" style="padding: 0.7em; max-width: 40em; margin: 1em auto; text-align: left;">
+    <p><span class="ui-icon ui-icon-alert" style="float: left; margin-right: .3em;"></span>
+    <strong>Don't send coins to old Bitcoin address.</strong> Your account bitcoin address has changed. Please use the new address below from now on.</p>
+  </div>
+  <table cols="3" style="font-size: larger" cellpadding=5 class="configure-status-table">
+  <tr>
+    <th>Bitcoin address</th>
+    <td>{{if profile.bitcoinAddress}}${profile.bitcoinAddress}{{else}}Not generated yet{{/if}}{{if profile.blockchainShowMigrationMessage}} <span id="configure-confirm-migration"></span></span>{{/if}}</td>
+  </tr>
+  <tr>
+    <th>Account balance</th>
+    <td><span id="configure-balance"></span> BTC</td>
+  </tr>
+  <tr>
+    <th>Subscription status</th>
+    <td id="configure-subscription-status">Was never activated</td>
+  </tr>
+  <tr>
+    <th>Current plan</th>
+    <td>{{if profile.bitcoinAddress}}${profile.currentPlanName}{{else}}Was never selected{{/if}}</td>
+  </tr>
+   </table>
+   
+  {{if profile.bitcoinAddress}}
+  	<h2>Change plan</h2>
+  {{else}}
+  	<h2>Choose your plan to create an invoice and generate an address</h2>
+  {{/if}}
+  <div id="configure-buttons-div"></div>
+  <h1>Payment History</h1>
+<table style="width: 100%">
+	<colgroup>
+		<col></col>
+		<col></col>
+		<col></col>
+		<col></col>
+	</colgroup>
+	<tr>
+		<th>Type</th>
+		<th>Description</th>
+		<th>Date</th>
+		<th>Debit</th>
+		<th>Credit</th>
+		<th>Balance</th>
+	</tr>
+
+{{each profile.paymentHistory}}
+	<tr>
+		{{if amount}}
+			{{if isPayment}}
+			<td>Payment</td>
+			<td>Payment Received - Thank You</td>
+			{{else}}
+				{{if category == "refund"}}
+				<td>Refund</td>
+				{{else}}
+					{{if category=="invoice"}}
+					<td>Invoice</td>
+					{{else}}
+					<td>Cancel invoice</td>
+					{{/if}}
+				{{/if}}
+			<td>
+				{{if category == "refund"}}
+					Payment refunded manually
+				{{else}}
+					{{if planName}}
+						${planName}
+					{{else}}
+						Basic Access
+					{{/if}}
+				{{/if}}
+			</td>
+			{{/if}}
+		{{else}}
+			{{if category == "activation"}}
+				<td>Subscription</td>
+				<td>Expires in ${duration_days} days on ${new Date(1000 * (transaction_timestamp + 86400 * duration_days)).toDateString() + ''}</td>
+			{{else}}
+				{{if category == "changePlan"}}
+					{{if prevPlanName == ''}}
+						<td>Set plan</td>
+						<td>${planName}</td>
+					{{else}}
+						<td>Change plan</td>
+						<td>From ${prevPlanName} to ${planName}</td>
+					{{/if}}	
+				{{else}}
+					{{if category == "expiration"}}
+						<td>Expiration</td>
+						<td>Subscription expired</td>
+					{{else}}
+						<td>A</td>
+						<td>B</td>
+					{{/if}}
+				{{/if}}
+			{{/if}}
+		{{/if}}
+		<td>${(new Date(transaction_timestamp * 1000).toDateString()) + ' ' + (new Date(transaction_timestamp * 1000).toLocaleTimeString()) + ''}</td>
+		{{if amount}}
+			{{if isPayment}}
+			<td></td>
+			<td>${amount} BTC</td>
+			{{else}}
+			<td>${-amount} BTC</td>
+			<td></td>
+			{{/if}}
+		{{else}}
+			{{if category == "activation" || category == "expiration" || category == "changePlan"}}
+				<td>&nbsp;</td>
+				<td>&nbsp;</td>
+			{{else}}
+				<td>C</td>
+				<td>D</td>
+			{{/if}}
+		{{/if}}
+		<td>${balance} BTC</td>
+	</tr>
+{{/each}}
+</table>

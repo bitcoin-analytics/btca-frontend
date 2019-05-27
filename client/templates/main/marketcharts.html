@@ -1,0 +1,61 @@
+<div class="ui-helper-clearfix">
+<div class="marketcharts-currency-exchanges-tabs" id="marketcharts-currency-exchanges-tabs" style="width:500px; float:left">
+{{each $data['currencyTickers']}}
+    <input type="radio" id="marketcharts-currency-exchange-all${$index}" xidx="all${$index}" xcur="${$index}" name="exchange" class="marketcharts-radio" /><label for="marketcharts-currency-exchange-all${$index}">all${$index}</label>
+{{/each}}
+</div>
+<div id="marketcharts-volume-tabs" style="width:363px; float:left">
+{{each $data['volumes']}}
+    <input type="radio" id="marketcharts-volume-${$index}" xidx="${$index}" name="volume" class="marketcharts-radio" /><label for="marketcharts-volume-${$index}">${$index}</label>
+{{/each}}
+</div>
+</div>
+{{each $data['currencyTickers']}}
+<div class="marketcharts-exchanges-tabs" id="marketcharts-exchanges-tab-${$index}" style="height: 53px">
+{{each $value}}
+    <input type="radio" id="marketcharts-exchange-${$value}" xidx="${$value}" name="exchange" class="marketcharts-radio" /><label for="marketcharts-exchange-${$value}">${$value}</label>
+{{/each}}
+</div>
+{{/each}}
+
+<div id="marketcharts-warning" class="ui-state-error ui-corner-all" style="padding: 0.7em; max-width: 40em; margin: 1em auto">
+    <p><span class="ui-icon ui-icon-alert" style="float: left; margin-right: .3em;"></span>
+    <strong>Subscription is not active.</strong> Try our new subscription options to enable full access. 0.001 BTC per day, 0.0075 BTC per month, 0.0125 BTC for 2 months.</p>
+</div>
+<div id="marketcharts-address-migration-warning" class="ui-state-error ui-corner-all" style="padding: 0.7em; max-width: 40em; margin: 1em auto; display:none;">
+    <p><span class="ui-icon ui-icon-alert" style="float: left; margin-right: .3em;"></span>
+    <strong>Don't send coins to old Bitcoin address.</strong> Your account bitcoin address has changed. Please confirm that you have read this message in Configure section.</p>
+</div>
+
+<div class="chartcontainer">
+    <div id="legend-cap" class="legend"></div>
+    <div id="marketchart-cap" class="marketchart" ></div>
+    <div calss="clear"> </div>
+</div>
+<div class="chartcontainer">
+    <div id="legend-btcAll" class="legend"></div>
+    <div id="marketchart-btcAll" class="marketchart" ></div>
+    <div calss="clear"> </div>
+</div>
+<div class="chartcontainer">
+    <div id="legend-t2sb1000" class="legend"></div>
+    <div id="marketchart-t2sb1000" class="marketchart" ></div>
+    <div calss="clear"> </div>
+</div>
+<div class="chartcontainer">
+    <div id="legend-ap2sb1000" class="legend "></div>
+    <div id="marketchart-ap2sb1000" class="marketchart" ></div>
+    <div calss="clear"> </div>
+</div>
+<div class="chartcontainer">
+    <div id="legend-tradesRelativeVolumeSB" class="legend "></div>
+    <div id="marketchart-tradesRelativeVolumeSB" class="marketchart" ></div>
+    <div calss="clear"> </div>
+</div>
+<div class="chartcontainer">
+    <div id="legend-tradesVolume" class="legend"></div>
+    <div id="marketchart-tradesVolume" class="marketchart" ></div>
+    <div calss="clear"> </div>
+</div>
+        
+<div class="ui-helper-clearfix"></div>

@@ -1,0 +1,10 @@
+<select id="xarbitrage-secondary-currency-select" title="Select secondary currency to compare">
+{{each $data['currencyTickers']}}
+  <option value="${$index}">${$index}</option>
+{{/each}}
+</select>
+<input id="xarbitrage-conversion-rate-display" class="xarbitrage-converstion-rate-display ui-widget ui-widget-content ui-corner-left ui-corner-right" style="font-size: 17px; vertical-align: bottom;" title="Conversoin rate" disabled="disabled"/>
+<input id="xarbitrage-conversion-rate" class="xarbitrage-converstion-rate ui-widget ui-widget-content ui-corner-left ui-corner-right" style="font-size: 17px; vertical-align: bottom;" title="Conversoin rate"/>
+{{tmpl($data) "#tmpl-main-arbitrage-cross-conv-rate-provider-select"}}
+<input id="xarbitrage-filter-percent" class="xarbitrage-filter-percent ui-widget ui-widget-content ui-corner-left ui-corner-right" style="font-size: 17px; vertical-align: bottom;" title="Minimum spread displayed (%)"/>
+

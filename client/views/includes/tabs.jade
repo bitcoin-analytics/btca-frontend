@@ -1,0 +1,38 @@
+#tabs
+		div(style="display: inline; float: right; background-color: transparent; padding: 0 0.9em; font-weight:bold;")
+				span#user not logged in
+				h1(style="display: inline") Bitcoin Ana&lambda;ytics
+		ul
+				li
+						a(href="#market-charts") Charts
+				li
+						a(href="#arbitrage") Arbitrage
+				li
+						a(href="#xarbitrage") XArbitrage
+				li
+						a(href="#depth-charts") Depth
+				li
+						a(href="#liquidity") Liquidity
+				li
+						a(href="#why") Why?
+				li
+						a(href="#social") Social
+				li#tab-login
+						a(href="#login") Login and Subscribe
+				li#tab-configure
+						a(href="#configure") Configure
+		#market-charts
+		#arbitrage
+		#xarbitrage
+		#depth-charts
+		#liquidity
+		#why
+				include ./why.html
+		#login
+				include ./auth.html
+		#configure
+				include ./configure.html
+		#social
+				include ./social.html
+
+

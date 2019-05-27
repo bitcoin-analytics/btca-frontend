@@ -1,0 +1,9 @@
+<thead id="asks-thead-${$item.domId}">
+    <tr><th colspan="3" class="title">${$item.asksTitle} Asks</th></tr>
+    <tr><th>Price</th><th>Volume</th><th>Sum</th></tr>
+</thead>
+<tbody id="asks-${$item.domId}">
+    {{each $data['asks']}}
+    <tr><td class="priceCell">${$value[0]}</td><td>${$value[1]}</td><td class="sumCell">${$value[2]}<span class="insig"></span></td></tr>
+    {{/each}}
+</tbody>

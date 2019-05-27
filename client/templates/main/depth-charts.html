@@ -1,0 +1,30 @@
+<div class="ui-helper-clearfix">
+<div class="depthcharts-currency-exchanges-tabs" id="depthcharts-currency-exchanges-tabs" style="width:500px; float:left">
+{{each $data['currencyTickers']}}
+    <input type="radio" id="depthcharts-currency-exchange-all${$index}" xidx="all${$index}" xcur="${$index}" name="depthchart-exchange" class="depthcharts-radio" /><label for="depthcharts-currency-exchange-all${$index}">all${$index}</label>
+{{/each}}
+</div>
+</div>
+{{each $data['currencyTickers']}}
+<div class="depthcharts-exchanges-tabs" id="depthcharts-exchanges-tab-${$index}" style="height: 53px">
+{{each $value}}
+    <input type="radio" id="depthcharts-exchange-${$value}" xidx="${$value}" name="depthchart-exchange" class="depthcharts-radio" /><label for="depthcharts-exchange-${$value}">${$value}</label>
+{{/each}}
+</div>
+{{/each}}
+<div id="depthcharts-warning" class="ui-state-error ui-corner-all" style="padding: 0.7em; max-width: 40em; margin: 1em auto">
+    <p><span class="ui-icon ui-icon-alert" style="float: left; margin-right: .3em;"></span>
+    <strong>Subscription is not active.</strong> Activate a subscription to get access to orderbook depth charts and orderbook tables.</p>
+</div>
+
+<div class="depthchartcontainer" style="background-color:white;">
+    <div id="legend-depth-chart" class="legend legend-depth-chart"></div>
+    <div id="depth-chart" class="depth-chart" ></div>
+    <div calss="clear"> </div>
+</div>
+<div class="depthchartcontainer" style="background-color:white;">
+    <div id="legend-depthvolume-chart" class="legend legend-depth-chart"></div>
+    <div id="depthvolume-chart" class="depth-chart" ></div>
+    <div calss="clear"> </div>
+</div>
+<div id="depth-orderbook"></div>

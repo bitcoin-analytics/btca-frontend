@@ -1,0 +1,5 @@
+<select id="xarbitrage-conversion-rate-provider-select-${$data['convRateProviderID']}" title="Select exchange rates provider" class="xarbitrage-conversion-rate-provider-select">
+{{each $data['convRateProviders']}}
+  <option value="${$index}" title="${$value.title}" {{if $value.disabled}}disabled="disabled"{{/if}}>${$value.label}</option>
+{{/each}}
+</select>

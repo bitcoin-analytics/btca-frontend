@@ -1,0 +1,78 @@
+<h1>Log in using OpenID authentication</h1>
+<p>Please use your existing OpenID to log in.
+If you do not have one you can learn more and register <a target="_blank" href="http://openid.net/get-an-openid/">using one of many</a> existing trusted OpenID providers.
+<br/><br/>
+</p>
+<p>We will not ask your personal data and will not send you any email.
+<br/><br/>
+</p>
+<p>To log in just click your OpenID provider icon and type your OpenID into form field if applicable.<br/><br/></p>
+
+<!--div style="height: 150px;" class="ui-helper-clearfix">
+<form id="openidlogin" class="openid" method="get"> 
+  <div><ul class="providers"> 
+  <li class="openid" title="OpenID"><img src="images/openidW.png" alt="icon" /> 
+  <span><strong>http://{your-openid-url}</strong></span></li> 
+  <li class="direct" title="Yahoo"> 
+		<img src="images/yahooW.png" alt="icon" /><span>http://yahoo.com/</span></li> 
+  <li class="username" title="AOL screen name"> 
+		<img src="images/aolW.png" alt="icon" /><span>http://openid.aol.com/<strong>username</strong></span></li> 
+  <li class="username" title="MyOpenID user name"> 
+		<img src="images/myopenid.png" alt="icon" /><span>http://<strong>username</strong>.myopenid.com/</span></li> 
+  <li class="username" title="Flickr user name"> 
+		<img src="images/flickr.png" alt="icon" /><span>http://flickr.com/<strong>username</strong>/</span></li> 
+  <li class="username" title="Technorati user name"> 
+		<img src="images/technorati.png" alt="icon" /><span>http://technorati.com/people/technorati/<strong>username</strong>/</span></li> 
+  <li class="username" title="Wordpress blog name"> 
+		<img src="images/wordpress.png" alt="icon" /><span>http://<strong>username</strong>.wordpress.com</span></li> 
+  <li class="username" title="Blogger blog name"> 
+		<img src="images/blogger.png" alt="icon" /><span>http://<strong>username</strong>.blogspot.com/</span></li> 
+  <li class="username" title="ClaimID user name"> 
+		<img src="images/claimid.png" alt="icon" /><span>http://claimid.com/<strong>username</strong></span></li> 
+  <li class="username" title="Vidoop user name"> 
+		<img src="images/vidoop.png" alt="icon" /><span>http://<strong>username</strong>.myvidoop.com/</span></li> 
+  <li class="username" title="Verisign user name"> 
+		<img src="images/verisign.png" alt="icon" /><span>http://<strong>username</strong>.pip.verisignlabs.com/</span></li> 
+  </ul></div> 
+  <fieldset> 
+  <label for="openid_username">Enter your <span>Provider user name</span></label> 
+  <div><span></span><input type="text" name="openid_username" /><span></span> 
+  <input id="submit-user" type="button" value="Login" /></div> 
+  </fieldset> 
+  <fieldset> 
+  <label for="openid_identifier">Enter your <a class="openid_logo" href="http://openid.net">OpenID</a></label> 
+  <div><input type="text" name="openid_identifier" /> 
+  <input id="submit-id" type="button" value="Login" /></div> 
+  </fieldset> 
+</form>
+</div-->
+  <!--li class="username" title="LiveJournal blog name"> 
+		<img src="images/livejournal.png" alt="icon" /><span>http://<strong>username</strong>.livejournal.com</span></li--> 
+<div>
+<div>
+	<form id="simpleopenid" class="openid" method="get" action="/auth/openid">
+	<fieldset style="display: none;">
+	<label>Enter your <span>user name</span><br>
+	<div><input type="text" name="openid_username" id="openid_username"></label><input type="submit" value="Sign In"></fieldset>
+	</fieldset>
+	<fieldset>
+	<label>Enter your OpenID <br>
+	<div><input type="text" name="openid_identifier" id="openid_identifier" size="60"></label><input type="submit" value="Login"></fieldset>
+	</fieldset>
+</form></div>
+	<p><em>Note:</em> Please take into account openid.anonymity.com and livejournal.com openid providers are not supported currently. If you experience any problems with openid sign in please let us now.</p>
+<br>
+<br>
+<br>
+
+<h2>Log in using your preffered Social Network</h2>
+<br>
+<p>
+<a href="/auth/google/" title="google"><img src="oauth-media/btn_google_signin_dark_normal_web.png" alt="google" height="53"/></a>
+<a href="/auth/facebook/" title="facebook"><img src="oauth-media/f_logo.png" alt="facebook" width="50"/></a>
+<a href="/auth/twitter/" title="twitter"><img src="oauth-media/twitter_newbird_boxed_whiteonblue.png" alt="twitter" width="50"/></a>
+<a href="/auth/linkedin/" title="linkedin"><img src="oauth-media/LinkedIn_IN_Icon_55px.png" alt="linkedin" width="50"/></a>
+<a href="/auth/vkontakte/" title="vkontakte"><img src="oauth-media/vk_mini.png" alt="vkontakte" width="50"/></a>
+</p>
+</div>
+

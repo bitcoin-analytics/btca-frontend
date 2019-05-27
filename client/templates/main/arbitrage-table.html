@@ -1,0 +1,24 @@
+<table class="arbitrage-table">
+  <thead>
+    <tr class="first">
+      <th class="ui-state-active ui-corner-top ui-corner-bl">${$item.volume}</th>
+      {{each $data}}
+      <th class='row ui-state-active ui-corner-top'>${$index}</th>
+      {{/each}}
+    </tr>
+  </thead>
+  <tbody>
+    {{each $data}}
+    <tr>
+      <th class="first ui-state-active ui-corner-left">${$index}</th>
+      {{each(colIndex, colValue) $value}}
+      <td x-row-ticker="${$index}" x-col-ticker="${colIndex}" class="{{if colValue.percent < 0 && colValue.percent > -10}}ui-state-error{{else colValue.percent < -10}}ui-state-highlight{{else colValue.percent > 0}}ui-state-active{{else}}ui-state-disabled{{/if}}">
+          <span class="diff">${$item.formatPercent(colValue.percent)}%</span><br/>
+          <span class="percent">(${$item.formatDiff(colValue.diff*$item.volume)})</span><br/>
+          <span class="bidask">B:${$item.formatAsk(colValue.bid)}<br/>A:${$item.formatAsk(colValue.ask)}</span>
+      </td>
+      {{/each}}
+    </tr>
+    {{/each}}
+  </tbody>
+</table>

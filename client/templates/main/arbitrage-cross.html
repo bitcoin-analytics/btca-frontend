@@ -1,0 +1,139 @@
+<div class="ui-helper-clearfix">
+<div class="xarbitrage-currency-tabs" id="xarbitrage-currency-tabs" style="width:372px; float:left">
+{{each $data['currencyTickers']}}
+    <input type="radio" id="xaribitrage-currency-${$index}" xcur="${$index}" name="xarbitrage_currency" class="marketcharts-radio" /><label for="xaribitrage-currency-${$index}">${$index}</label>
+{{/each}}
+</div>
+<div id="xarbitrage-volume-tabs" style="width:363px; float:left">
+{{each $data['volumes']}}
+    <input type="radio" id="xarbitrage-volume-${$index}" xvol="${$index}" name="xarbitrage_volume" class="marketcharts-radio" /><label for="xarbitrage-volume-${$index}">${$index}</label>
+{{/each}}
+</div>
+</div>
+<div id="xarbitrage-secondary-currency-tabs" class="xarbitrage-secondary-currency-tabs ui-helper-clearfix" style="margin: 20px;">
+</div> 
+
+<div id="xarbitrage-warning" class="ui-state-error ui-corner-all" style="padding: 0.7em; max-width: 40em; margin: 1em auto">
+    <p><span class="ui-icon ui-icon-alert" style="float: left; margin-right: .3em;"></span>
+    <strong>Subscription is not active</strong> arbitrage data is delayed by 6 hours. Orderbooks and charts are not delayed.</p>
+</div>
+
+<div style="width: 1250px; float:left;">
+    <div style="float:left; width:50%;">
+        <div id="xarbitrage-table-all"></div>
+        <div id="xarbitrage-table"></div>
+    </div>
+    <!--div id="arbitrage-orderbook"></div-->
+</div>
+<div class="clear" style=" margin-bottom: 20px;"></div>
+<div class="chartcontainer" id="xarbitrage-obarbpercent-container">
+    <div id="legend-obarbpercent-x" class="legend"></div>
+    <div id="xarbitrage-obarbpercent" class="marketchart" ></div>
+    <div calss="clear"> </div>
+</div>
+<div class="clear" style=" margin-bottom: 20px;"></div>
+<div class="chartcontainer">
+    <div id="legend-arbpercent-x" class="legend"></div>
+    <div id="xarbitrage-arbpercent" class="marketchart" ></div>
+    <div calss="clear"> </div>
+</div>
+<div class="chartcontainer">
+    <div id="legend-mktexecprice-x" class="legend"></div>
+    <div id="xarbitrage-mktexecprice" class="marketchart" ></div>
+    <div calss="clear"> </div>
+</div>
+<div class="chartcontainer">
+    <div id="legend-ap2sb-x" class="legend"></div>
+    <div id="xarbitrage-ap2sb" class="marketchart" ></div>
+    <div calss="clear"> </div>
+</div>
+<!--<div style="width: 1250px; float:left; margin-top: 20px;">
+    <div id="arbitrage-orderbook"></div>
+</div>
+--><div class="clear" style=" margin-bottom: 20px;"></div>
+
+  <style>
+    .ui-dialog .ui-state-error { padding: .3em; }
+    .validateTips { border: 1px solid transparent; padding: 0.3em; }
+    .ui-dialog label, .ui-dialoginput {display:block}
+    /*.ui-dialog {font-size: 20px;}*/
+    .ui-dialog p, .ui-dialog input,
+    .ui-dialog label, .ui-dialog span.ui-dialog-title,
+    .ui-dialog button#xarbitrage-alerts-dialog-formdialog-save span.ui-button-text {font-size: 15px}
+    .ui-dialog fieldset {outline: solid 1px grey; padding: 5px; margin-bottom: 5px}
+    .ui-dialog fieldset legend {font-size: 16px;}
+  </style>
+<div id="dialog-form" title="Set values">
+  <p class="validateTips">All form fields are required.</p>
+ 
+  <form>
+  <fieldset>
+    <label for="rate">Conversion rate</label>
+    <input type="text" name="rate" id="rate" class="text ui-widget-content ui-corner-all">
+    <label for="limit">Top limit percent</label>
+    <input type="text" name="limit" id="limit" value="" class="text ui-widget-content ui-corner-all">
+  </fieldset>
+  </form>
+</div>
+
+<div id="custom-values-dialog" title="Set values">
+  <p class="validateTips">All form fields are required.</p>
+ 
+  <form>
+  <fieldset>
+    <label for="custom-limit">Top limit percent</label>
+    <input type="text" name="custom-limit" id="custom-limit" value="" class="text ui-widget-content ui-corner-all">
+    <input type="hidden" name="rate" id="rate" class="text ui-widget-content ui-corner-all">
+  </fieldset>
+  </form>
+</div>
+
+<ul id="xarbitrage-table-dropdown-menu">
+<!--    <li id="xarbitrage-dropdown-alert-stop"><a href="#">Stop</a></li>
+    <li id="xarbitrage-dropdown-alert-edit"><a href="#">Add/Edit alert</a></li>
+    <li id="xarbitrage-dropdown-alert-delete"><a href="#">Delete alert</a></li>
+-->    <li id="xarbitrage-dropdown-alert-pin"><a href="#">Pin</a></li>
+    <li id="xarbitrage-dropdown-alert-unpin"><a href="#">Unpin</a></li>
+</ul>
+
+<div id="xarbitrage-alerts-dialog-form" title="Set alert">
+    <p id="alertheading"></p>
+  <p class="alerttips-validateTips">All form fields are required.</p>
+ 
+  <form>
+  <fieldset>
+    <legend>"Alert ON" condition:</legend>
+    <label for="percent">A</label>
+    <input type="text" name="percent" id="percent" class="text ui-widget-content ui-corner-all">
+    <label for="timetreshold">B</label>
+    <input type="text" name="timetreshold" id="timetreshold" value="" class="text ui-widget-content ui-corner-all">
+    <label for="alertconversionrate">Conversion rate</label>
+    {{tmpl($data) "#tmpl-main-arbitrage-cross-conv-rate-provider-select"}}
+    <input type="text" name="alertconversionrate-custom" id="alertconversionrate-custom" value="" class="text ui-widget-content ui-corner-all"/>
+<!--    <label>Active</label>
+    <input type="checkbox" name="alertactive" id="alertactive" class="text ui-widget-content ui-corner-all"><label for="alertactive">--</label></input>
+-->
+  </fieldset>
+  <fieldset>
+    <legend>"Alert OFF: condition:</legend>
+    <label for="X">X</label>
+    <input type="text" name="X" id="X" class="text ui-widget-content ui-corner-all"/>
+    <label for="Y">Y</label>
+    <input type="text" name="Y" id="Y" class="text ui-widget-content ui-corner-all"/>
+    <label for="Z">Z</label>
+    <input type="text" name="Z" id="Z" class="text ui-widget-content ui-corner-all"/>
+    <label>Send second SMS on "OFF"</label>
+    <input type="checkbox" name="offsms" id="offsms" class="text ui-widget-content ui-corner-all"><label for="offsms">--</label></input>
+
+    
+  </fieldset>
+  </form>
+</div>
+<div id="xarbitrage-sound">
+<!--    <audio autoplay="autoplay">
+        <source src="sounds/arb-alert-1.mp3" type="audio/mpeg" />
+        <source src="sounds/arb-alert-1.ogg" type="audio/ogg" />
+        <embed hidden="true" autostart="true" loop="false" src="sounds/arb-alert-1.mp3" />
+    </audio>
+--></div>
+
