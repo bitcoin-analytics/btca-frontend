@@ -1,4 +1,4 @@
-var ss = require('socketstream');
+var ss = require('socketstream')
 
 ss.client.define('main', {
 	view:   'app.jade',
@@ -12,9 +12,9 @@ ss.client.formatters.add(require('ss-jade'))
 ss.client.formatters.add(require('ss-stylus'))
 
 ss.http.route('/', function(req, res){
-  res.serveClient('main');
-});
+	res.serveClient('main')
+})
 
-if (ss.env === 'production') ss.client.packAssets();
+if (ss.env === 'production') ss.client.packAssets()
 
-ss.start();
+ss.start()
