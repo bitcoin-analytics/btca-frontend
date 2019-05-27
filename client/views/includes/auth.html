@@ -8,8 +8,9 @@ If you do not have one you can learn more and register <a target="_blank" href="
 </p>
 <p>To log in just click your OpenID provider icon and type your OpenID into form field if applicable.<br/><br/></p>
 
-<!--div style="height: 150px;" class="ui-helper-clearfix">
-<form id="openidlogin" class="openid" method="get"> 
+<div style="height: 150px;" class="ui-helper-clearfix">
+<!--
+<form id="openidlogin" class="openid" method="get">
   <div><ul class="providers"> 
   <li class="openid" title="OpenID"><img src="images/openidW.png" alt="icon" /> 
   <span><strong>http://{your-openid-url}</strong></span></li> 
@@ -35,32 +36,44 @@ If you do not have one you can learn more and register <a target="_blank" href="
 		<img src="images/verisign.png" alt="icon" /><span>http://<strong>username</strong>.pip.verisignlabs.com/</span></li> 
   </ul></div> 
   <fieldset> 
-  <label for="openid_username">Enter your <span>Provider user name</span></label> 
-  <div><span></span><input type="text" name="openid_username" /><span></span> 
-  <input id="submit-user" type="button" value="Login" /></div> 
+    <label for="openid_username">Enter your <span>Provider user name</span></label> 
+    <div>
+      <span></span><input type="text" name="openid_username" /><span></span> 
+      <input id="submit-user" type="button" value="Login" />
+    </div> 
   </fieldset> 
   <fieldset> 
   <label for="openid_identifier">Enter your <a class="openid_logo" href="http://openid.net">OpenID</a></label> 
-  <div><input type="text" name="openid_identifier" /> 
-  <input id="submit-id" type="button" value="Login" /></div> 
+  <div>
+    <input type="text" name="openid_identifier" /> 
+    <input id="submit-id" type="button" value="Login" />
+  </div> 
   </fieldset> 
 </form>
-</div-->
-  <!--li class="username" title="LiveJournal blog name"> 
+--> 
+
+
+<!--li class="username" title="LiveJournal blog name"> 
 		<img src="images/livejournal.png" alt="icon" /><span>http://<strong>username</strong>.livejournal.com</span></li--> 
 <div>
-<div>
-	<form id="simpleopenid" class="openid" method="get" action="/auth/openid">
-	<fieldset style="display: none;">
-	<label>Enter your <span>user name</span><br>
-	<div><input type="text" name="openid_username" id="openid_username"></label><input type="submit" value="Sign In"></fieldset>
-	</fieldset>
-	<fieldset>
-	<label>Enter your OpenID <br>
-	<div><input type="text" name="openid_identifier" id="openid_identifier" size="60"></label><input type="submit" value="Login"></fieldset>
-	</fieldset>
-</form></div>
-	<p><em>Note:</em> Please take into account openid.anonymity.com and livejournal.com openid providers are not supported currently. If you experience any problems with openid sign in please let us now.</p>
+    <form id="simpleopenid" class="openid" method="get" action="/auth/openid">
+      <fieldset style="display: none;">
+        <label>Enter your <span>user name</span><br>
+           <input type="text" name="openid_username" id="openid_username">
+        </label>
+	<input type="submit" value="Sign In">
+      </fieldset>
+      <fieldset>
+        <div>
+          <label>Enter your OpenID <br>
+            <input type="text" name="openid_identifier" id="openid_identifier" size="60">
+	  </label>
+	  <input type="submit" value="Login">
+        </div>
+      </fieldset>
+    </form>
+</div>
+  <p><em>Note:</em> Please take into account openid.anonymity.com and livejournal.com openid providers are not supported currently. If you experience any problems with openid sign in please let us now.</p>
 <br>
 <br>
 <br>
@@ -75,4 +88,3 @@ If you do not have one you can learn more and register <a target="_blank" href="
 <a href="/auth/vkontakte/" title="vkontakte"><img src="oauth-media/vk_mini.png" alt="vkontakte" width="50"/></a>
 </p>
 </div>
-
