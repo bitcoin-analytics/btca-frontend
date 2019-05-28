@@ -35,6 +35,7 @@
     "sd-daemon": "git+https://git@github.com/nponeccop/node-sd-daemon.git#hotfix"
   },
   "devDependencies": {
-    "eslint": "^5.16.0"
+    "eslint": "^5.16.0",
+    "htmllint-cli": "0.0.7"
   }
 }
