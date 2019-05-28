@@ -5,7 +5,7 @@ Open-source parts of bitcoin-analytics.com
 
 ```sh
 $ npm install
-$ npm app
+$ node app
 ```
 
 Connect to `localhost:3000`
