@@ -2,6 +2,7 @@ console.error("appJs")
 var	ss = require('socketstream')
 ,	fs = require('fs')
 ,   express = require('express')
+, everyauth = require('./server/lib/everyauth').everyauth
 var bodyParser = require('body-parser')
 var morgan = require('morgan')
 
@@ -57,5 +58,6 @@ ss.http.middleware.append(bodyParser())
 const router = express.Router()
 routes(router)
 ss.http.middleware.append(router)
+ss.http.middleware.append(everyauth.middleware())
 
 ss.start()
