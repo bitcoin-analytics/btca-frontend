@@ -30,9 +30,6 @@ exports.profile = function (userId)
 			bitcoinAddress : this.bitcoinAddress
 		,	paymentHistory : this.paymentHistory
 		,	currentPlanName : currentPlanName(this.paymentHistory)
-		,	arbitrageAlerts : this.arbitrageAlerts ? this.arbitrageAlerts : []
-		,	arbitragePins : this.arbitragePins ? this.arbitragePins : []
-		, arbitrageAlertsState: getArbitrageAlertsState(userId)
 		}
 				
 		if ('blockchainShowMigrationMessage' in this)

@@ -1,4 +1,5 @@
 var	billing = require('/billing')
+const map = require('/map')
 const config ={}
 var model = new Backbone.Model()
 
