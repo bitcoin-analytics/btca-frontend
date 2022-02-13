@@ -9,6 +9,7 @@
   },
   "dependencies": {
     "body-parser": "^1.19.0",
+    "callsites": "^3.1.0",
     "chokidar": "^3.3.1",
     "coffeescript": "^2.5.1",
     "dirty": "^1.1.0",
@@ -25,7 +26,6 @@
     "ss-hogan": "^0.1.3",
     "ss-jade": "^0.1.3",
     "ss-stylus": "^0.1.9",
-    "stacktrace": "^1.2.0",
     "underscore": "^1.10.2",
     "xz-pipe": "0.0.2"
   },

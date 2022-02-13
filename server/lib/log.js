@@ -2,7 +2,7 @@ var util = require('util')
 ,	format = require('sprintf-js').sprintf
 ,	path = require('path')
 ,	fs = require('fs')
-,	st = require('stacktrace')
+,	callsites = require('callsites')
 
 function noExt(ff)
 {
@@ -18,8 +18,8 @@ function formatFrame(frame)
         , d.getHours()
         , d.getMinutes()
         , d.getSeconds()
-        , noExt(frame.scriptName)
-        , frame.line
+        , noExt(frame.getFileName())
+        , frame.getLineNumber()
         )
 }
 
@@ -37,7 +37,7 @@ exports.openLog = function (logName)
 
 			log : function ()
 			{
-				var header = formatFrame(st.getStack()[1])
+				var header = formatFrame(callsites()[1])
 				var write = function (s)
 				{
 					file.write(header + ' ' + s + '\n')
@@ -92,7 +92,7 @@ function patchSystemLog(propertyName)
 {
 	consoleHook.hook1(propertyName, function (methodName, s)	
 	{
-		var header = formatFrame(st.getStack()[3]) + ' '
+		var header = formatFrame(callsites()[3]) + ' '
 		return consoleHook.filter(header + (s == '' ? 'called' : s))
 	})
 }
