@@ -2,7 +2,7 @@ console.error("appJs")
 var	ss = require('socketstream')
 ,	fs = require('fs')
 ,   express = require('express')
-, everyauth = require('./server/lib/everyauth').everyauth
+, auth0 = require('express-openid-connect').auth
 var bodyParser = require('body-parser')
 var morgan = require('morgan')
 
@@ -41,6 +41,15 @@ if (ss.env == 'production') ss.client.packAssets();
 
 function routes(app)
 {
+	app.use(auth0({
+		authRequired: false,
+		auth0Logout: true,
+		secret: '',
+		baseURL: 'http://localhost:3000',
+		clientID: '',
+		issuerBaseURL: 'https://dev-025d9prn.us.auth0.com'
+	}))
+
 /*
 	app.get('/billing/blockchain/notify', billingBlockchain.notify(user.onPayment))
 	app.get('/billing/blockchain2/notify', billingBlockchain2.notify(user.onPayment))
@@ -58,6 +67,4 @@ ss.http.middleware.append(bodyParser())
 const router = express.Router()
 routes(router)
 ss.http.middleware.append(router)
-ss.http.middleware.append(everyauth.middleware())
-
 ss.start()
