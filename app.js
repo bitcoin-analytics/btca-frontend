@@ -1,8 +1,8 @@
 console.error("appJs")
 var	ss = require('socketstream')
 ,	fs = require('fs')
-,   express = require('express')
-, auth0 = require('express-openid-connect').auth
+,	express = require('express')
+,	ExpressOIDC = require('@okta/oidc-middleware').ExpressOIDC
 var bodyParser = require('body-parser')
 var morgan = require('morgan')
 
@@ -41,14 +41,14 @@ if (ss.env == 'production') ss.client.packAssets();
 
 function routes(app)
 {
-	app.use(auth0({
-		authRequired: false,
-		auth0Logout: true,
-		secret: '',
-		baseURL: 'http://localhost:3000',
-		clientID: '',
-		issuerBaseURL: 'https://dev-025d9prn.us.auth0.com'
-	}))
+	const oidc = new ExpressOIDC({
+		scope: 'openid profile',
+		appBaseUrl: 'http://localhost:3000',
+		issuer: 'https://dev-025d9prn.us.auth0.com',
+		client_id: '1',
+		client_secret: '2'
+	})
+	app.use(oidc.router)
 
 /*
 	app.get('/billing/blockchain/notify', billingBlockchain.notify(user.onPayment))
@@ -56,9 +56,16 @@ function routes(app)
 */
 	app.get('/', function (req, res)
 	{
+		console.log('root', req.userContext)
 		res.serveClient('main')
 	})
+	oidc.on('ready', () => {
+		console.log('oidc start')
+	});
 
+	oidc.on('error', err => {
+		console.log('error', err)
+	});
 }
 
 ss.http.middleware.prepend(morgan('combined', { stream: openForAppend("var/log/http.log")}))
