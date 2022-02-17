@@ -74,4 +74,18 @@ ss.http.middleware.append(bodyParser())
 const router = express.Router()
 routes(router)
 ss.http.middleware.append(router)
+
+const app = express()
+
+ss.task('start-server', function(done) {
+	app.use(ss.http.middleware)
+	app.listen(3000, function() {
+		done();
+	});
+});
+
+ss.task('attach-stream', function() {
+	ss.stream(app)
+})
+
 ss.start()
