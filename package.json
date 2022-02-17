@@ -16,7 +16,6 @@
     "event-stream": "^4.0.1",
     "everyauth": "git+https://github.com/nponeccop/everyauth.git#hotfix-0.4.10",
     "express": "^4.17.2",
-    "express-openid-connect": "^2.6.0",
     "hooker": "^0.2.3",
     "lazy": "^1.0.11",
     "morgan": "^1.10.0",
