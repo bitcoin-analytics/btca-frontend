@@ -47,6 +47,9 @@ function routes(app)
 		scope: 'openid profile',
 		appBaseUrl: 'http://localhost:3000',
 		issuer: 'https://dev-025d9prn.us.auth0.com',
+		routes: {
+			loginCallback: { path: '/authorization-code/callback' }
+		},
 		client_id: '1',
 		client_secret: '2'
 	})
