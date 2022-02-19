@@ -39,6 +39,8 @@ ss.ws.transport.use('engineio', { io: function(io) {
 // Minimise and pack assets if you type SS_ENV=production node app
 if (ss.env == 'production') ss.client.packAssets();
 
+let socketIoRequestHandler = null
+
 function routes(app)
 {
 	const oidc = new ExpressOIDC({
@@ -59,6 +61,8 @@ function routes(app)
 		console.log('root', req.userContext)
 		res.serveClient('main')
 	})
+	app.all('/engine.io/*', (req, res, next) => socketIoRequestHandler(req, res, next))
+
 	oidc.on('ready', () => {
 		console.log('oidc start')
 	});
@@ -77,15 +81,23 @@ ss.http.middleware.append(router)
 
 const app = express()
 
-ss.task('start-server', function(done) {
-	app.use(ss.http.middleware)
-	app.listen(3000, function() {
-		done();
-	});
-});
+const server = app.listen(3000) //, '127.0.0.1');
+const expressListener = server.listeners('request')
+ss.start(server)
 
-ss.task('attach-stream', function() {
-	ss.stream(app)
+// reset listeners
+const ioRequestListener = server.listeners('request')
+
+socketIoRequestHandler = function (req, res) {
+	console.log(req.url)
+	ioRequestListener.forEach(function (listener) {
+		listener.call(server, req, res)
+	})
+}
+
+server.removeAllListeners('request')
+expressListener.forEach(function (l) {
+	server.on('request', l)
 })
 
-ss.start()
+app.use(ss.http.middleware)
