@@ -2,6 +2,7 @@ var	user = require('./user')
 ,	authLog = require('./log').openLog('auth')
 ,	util = require('util')
 , config = require('./config')
+, ExpressOIDC = require('@okta/oidc-middleware').ExpressOIDC
 
 const redirect = (res, url) => {
 	res.writeHead(301, {'Location' : url })
@@ -57,4 +58,27 @@ exports.handleAuthModuleError = function(err, data)
 	}catch(e){
 		console.error(e)
 	}
+}
+
+exports.initializeOIDC = () => {
+	const oidc = new ExpressOIDC({
+		scope: 'openid profile',
+		appBaseUrl: 'http://localhost:3000',
+		issuer: 'https://dev-025d9prn.us.auth0.com',
+		routes: {
+			loginCallback: { path: '/authorization-code/callback' }
+		},
+		client_id: '1',
+		client_secret: '2'
+	})
+
+	oidc.on('ready', () => {
+		console.log('oidc start')
+	})
+
+	oidc.on('error', err => {
+		console.log('error', err)
+	})
+
+	return oidc
 }

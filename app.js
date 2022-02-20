@@ -2,7 +2,7 @@ console.error("appJs")
 var	ss = require('socketstream')
 ,	fs = require('fs')
 ,	express = require('express')
-,	ExpressOIDC = require('@okta/oidc-middleware').ExpressOIDC
+,	initializeOIDC = require('@okta/oidc-middleware').initializeOIDC
 var bodyParser = require('body-parser')
 var morgan = require('morgan')
 
@@ -43,16 +43,7 @@ let socketIoRequestHandler = null
 
 function routes(app)
 {
-	const oidc = new ExpressOIDC({
-		scope: 'openid profile',
-		appBaseUrl: 'http://localhost:3000',
-		issuer: 'https://dev-025d9prn.us.auth0.com',
-		routes: {
-			loginCallback: { path: '/authorization-code/callback' }
-		},
-		client_id: '1',
-		client_secret: '2'
-	})
+	const oidc = initializeOIDC()
 	app.use(oidc.router)
 
 /*
@@ -61,18 +52,10 @@ function routes(app)
 */
 	app.get('/', function (req, res)
 	{
-		console.log('root', req.userContext)
+		console.log('root')
 		res.serveClient('main')
 	})
 	app.all('/engine.io/*', (req, res, next) => socketIoRequestHandler(req, res, next))
-
-	oidc.on('ready', () => {
-		console.log('oidc start')
-	});
-
-	oidc.on('error', err => {
-		console.log('error', err)
-	});
 }
 
 ss.http.middleware.prepend(morgan('combined', { stream: openForAppend("var/log/http.log")}))
@@ -92,7 +75,7 @@ ss.start(server)
 const ioRequestListener = server.listeners('request')
 
 socketIoRequestHandler = function (req, res) {
-	console.log(req.url)
+	console.log('socketIoRequestHandler', req.url)
 	ioRequestListener.forEach(function (listener) {
 		listener.call(server, req, res)
 	})
