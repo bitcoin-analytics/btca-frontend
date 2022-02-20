@@ -2,7 +2,7 @@ console.error("appJs")
 var	ss = require('socketstream')
 ,	fs = require('fs')
 ,	express = require('express')
-,	initializeOIDC = require('@okta/oidc-middleware').initializeOIDC
+,	initializeOIDC = require('./server/lib/auth').initializeOIDC
 var bodyParser = require('body-parser')
 var morgan = require('morgan')
 
