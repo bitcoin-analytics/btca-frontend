@@ -9,20 +9,22 @@ const redirect = (res, url) => {
 	res.end()
 }
 
-exports.findOrCreateUser = function(session, userMetadata, promise)
+exports.findOrCreateUser = function(session, userMetadata)
 {
 	//console.log("authentication ok", session)
+	if (!userMetadata) return
+
 	authLog.log(util.inspect(userMetadata))
-	session.userId = userMetadata.id
+	session.userId = userMetadata.userinfo.sub
 	session.save()
 	var profile = user.profile( session.userId )
 	//console.log(profile)
 	//console.log(session.userId)
 	//console.log(util.inspect(userMetadata, true, 1000, true))
 
-if (typeof profile.nickname != 'string')
+	if (typeof profile.nickname != 'string')
 	{
-		profile.nickname = userMetadata.name
+		profile.nickname = userMetadata.userinfo.name
 		profile.save()
 		authLog.log({claimedIdentifier : session.userId, nickname : profile.nickname, category: 'auth_ok'})
 	}
@@ -30,8 +32,6 @@ if (typeof profile.nickname != 'string')
 	{
 		authLog.log({claimedIdentifier : session.userId, category : 'auth_ok'})
 	}
-	
-	promise.fulfill(profile)
 }
 
 exports.handleAuthCallbackError = function(req, res)
