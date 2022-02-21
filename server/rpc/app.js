@@ -1,5 +1,6 @@
 const user = require('../lib/user')
 const uptime = require('../lib/uptime')
+const { findOrCreateUser } = require('../lib/auth')
 
 function connectReconnectResponse(req, profile)
 {
@@ -23,8 +24,10 @@ exports.actions = function (req, res, ss)
 		init : function ()
 		{
 			console.log('init!!!!!!!!!!!!!!!!!!!!!')
+			if (req.session.passport) findOrCreateUser(req.session, req.session.passport.user)
+
 			var profile = user.profile(req.session.userId)
-			
+
 			var data = connectReconnectResponse(req, profile)
 			data.isEveryAuthError = req.session.everyauthAuthError ? req.session.everyauthAuthError : ''
 			req.session.everyauthAuthError = undefined
@@ -35,6 +38,8 @@ exports.actions = function (req, res, ss)
 	,	initReconnect : function()
 		{
 			console.log('initReconnect!!!!!!!!!!!!!!!!!!!!!')
+			if (req.session.passport) findOrCreateUser(req.session, req.session.passport.user)
+
 			var profile = user.profile(req.session.userId)
 			var data = connectReconnectResponse(req, profile)
 			res(data)
