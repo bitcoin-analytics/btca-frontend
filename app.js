@@ -2,7 +2,7 @@ console.error("appJs")
 var	ss = require('socketstream')
 ,	fs = require('fs')
 ,	express = require('express')
-,	{ initializeOIDC, findOrCreateUser } = require('./server/lib/auth')
+,	{ initializeOIDC } = require('./server/lib/auth')
 var bodyParser = require('body-parser')
 var morgan = require('morgan')
 
@@ -10,7 +10,6 @@ function openForAppend(fileName)
 {
 	return fs.createWriteStream(fileName, {'flags': 'a'})
 }
-
 
 ss.client.define('main', {
 	view:   'app.jade',
@@ -53,7 +52,6 @@ function routes(app)
 	app.get('/', function (req, res)
 	{
 		console.log('root')
-		findOrCreateUser(req.session, req.userContext)
 		res.serveClient('main')
 	})
 	app.all('/engine.io/*', (req, res, next) => socketIoRequestHandler(req, res, next))
