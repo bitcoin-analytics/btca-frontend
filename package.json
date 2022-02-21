@@ -15,7 +15,6 @@
     "coffeescript": "^2.6.1",
     "dirty": "^1.1.3",
     "event-stream": "^4.0.1",
-    "everyauth": "git+https://github.com/nponeccop/everyauth.git#hotfix-0.4.10",
     "express": "^4.17.2",
     "hooker": "^0.2.3",
     "lazy": "^1.0.11",
