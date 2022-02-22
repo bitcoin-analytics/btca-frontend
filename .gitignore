@@ -1,3 +1,4 @@
 node_modules/
 var/log/*.log
 var/dirty/users.dirty
+client/static/assets
