@@ -16,7 +16,7 @@ exports.fromList = function (list)
 	,	member : function (item)
 		{
 			return !!set[item]
-		} 
+		}
 	}
 }
 

@@ -31,12 +31,12 @@ exports.profile = function (userId)
 		,	paymentHistory : this.paymentHistory
 		,	currentPlanName : currentPlanName(this.paymentHistory)
 		}
-				
+
 		if ('blockchainShowMigrationMessage' in this)
 		{
 				cp['blockchainShowMigrationMessage'] = this.blockchainShowMigrationMessage
  		}
-		
+
 		return cp
 	}
 	return u
@@ -66,7 +66,7 @@ exports.balance = function (paymentHistory)
 		)
 	}
 }
-	
+
 exports.isSubscribed = function (profile)
 {
 	return profile && profile.paymentHistory.length > 0 && exports.balance(profile.paymentHistory) >= -satoshi
@@ -107,7 +107,7 @@ function processPayment(j, history)
 	delete j.bitcoin_address
 	delete j.signature
 	j.transaction_timestamp = new Date().getTime() / 1000
-	
+
 	var idx = findFirst(history, function (a)
 	{
 		return a.category == 'receive' && compareProperty(a, j, 'transaction_hash') && compareProperty(a, j, 'amount')
@@ -196,9 +196,9 @@ exports.startPollAccountForExpiration = function()
 			users.forEach(pollAccountForExpiration)
 		})
 	)
-	
+
 	exports.refreshArbitrageAlertsList()
-	
+
 	return usersDbLoadedReady.promise
 }
 
@@ -279,7 +279,7 @@ function pollAccountForExpiration(userId, profile)
 	}
 	users.set(userId, profile)
 }
-	
+
 exports.createAccount = function (userId, profile, bitcoinAddress, planName)
 {
 	profile.bitcoinAddress = bitcoinAddress
@@ -293,10 +293,10 @@ exports.createAccount = function (userId, profile, bitcoinAddress, planName)
 	})
 	exports.addInvoice2(userId, profile, planName)
 }
-	
+
 exports.changePlan = function (userId, profile, planName)
 {
-	var userInactive = !exports.isSubscribed(profile) 
+	var userInactive = !exports.isSubscribed(profile)
 
 	if (userInactive)
 	{
@@ -304,10 +304,10 @@ exports.changePlan = function (userId, profile, planName)
 	}
 	addHistoryRecord(userId, profile.paymentHistory, function ()
 	{
-		return { 
+		return {
 			category : 'changePlan'
 		, 	prevPlanName : currentPlanName(profile.paymentHistory)
-		,	planName : planName 
+		,	planName : planName
 		}
 	})
 
@@ -322,9 +322,9 @@ exports.changePlan = function (userId, profile, planName)
 		}
 
 	}
-	
+
 }
-	
+
 function cancelInvoice(userId, profile)
 {
 	addHistoryRecord(userId, profile.paymentHistory, function ()
@@ -337,10 +337,10 @@ function cancelInvoice(userId, profile)
 		}
 	})
 }
-	
+
 exports.addInvoice2 = function (userId, profile, planName)
 {
-	addHistoryRecord(userId, profile.paymentHistory, function () 
+	addHistoryRecord(userId, profile.paymentHistory, function ()
 	{
 		return {
 			category : "invoice"

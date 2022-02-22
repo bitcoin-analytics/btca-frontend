@@ -37,7 +37,7 @@ exports.tickerCurrency = function(ticker)
 }
 
 exports.currenciesToFetch = []
-	
+
 exports.array2hashOfTrue = function (a)
 {
 	var h = {}
@@ -47,7 +47,7 @@ exports.array2hashOfTrue = function (a)
 	})
 	return h
 }
-	
+
 exports.makeTickersToFetch = function (enabledCurrencies, disabledTickers)
 {
 	var tickerSet = set.fromList(disabledTickers)
@@ -70,7 +70,7 @@ exports.makeClientCurrencyTickers = function (enabledCurrencies, disabledTickers
 	var out = {}
 	for (var ticker in apiParams)
 	{
-		
+
 		if (currencySet.elem(apiParams[ticker].cur) && !tickerSet.elem(ticker))
 		{
 			if (apiParams[ticker].cur in out)
@@ -80,7 +80,7 @@ exports.makeClientCurrencyTickers = function (enabledCurrencies, disabledTickers
 			else
 			{
 				out[apiParams[ticker].cur] = [ticker]
-			}		
+			}
 		}
 	}
 	return out

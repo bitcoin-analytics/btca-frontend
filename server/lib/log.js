@@ -60,7 +60,7 @@ exports.openLog = function (logName)
 	}
 	return logs[logName]
 }
-					
+
 process.on('exit', function (e)
 {
 	console.error('exiting')
@@ -90,7 +90,7 @@ var consoleHook = require('./console-hook')
 
 function patchSystemLog(propertyName)
 {
-	consoleHook.hook1(propertyName, function (methodName, s)	
+	consoleHook.hook1(propertyName, function (methodName, s)
 	{
 		var header = formatFrame(callsites()[3]) + ' '
 		return consoleHook.filter(header + (s == '' ? 'called' : s))

@@ -18,7 +18,7 @@ exports.forEach = function (map, f)
 	}
 	return out
 }
-	
+
 exports.swapKeysAndValues = function (h)
 {
 	var out = {}
@@ -56,7 +56,7 @@ function hkeys(h)
 {
 	return mapHash(h, function ()
 	{
-		return ''	
+		return ''
 	})
 	var keys = {}
 }

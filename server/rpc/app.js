@@ -7,7 +7,7 @@ function connectReconnectResponse(req, profile)
 	return {
 		uptime : uptime.uptime()
 	,	profile : profile.clientProfile()
-	,	nickname : (typeof profile.nickname == 'string' ? profile.nickname : req.session.userId) 
+	,	nickname : (typeof profile.nickname == 'string' ? profile.nickname : req.session.userId)
 	,	userId : req.session.userId
 	,	isSubscribed : isSubscribed
 	}
@@ -29,7 +29,7 @@ exports.actions = function (req, res, ss)
 			data.isEveryAuthError = req.session.everyauthAuthError ? req.session.everyauthAuthError : ''
 			req.session.everyauthAuthError = undefined
 			req.session.save()
-			
+
 			res(data)
 		}
 	,	initReconnect : function()

@@ -23,7 +23,7 @@ function runNTimesPerHour(n, f)
 	var to = 1000 * alignmentForNTimesPerHour(new Date(), n)
 	nextTime = Date.now() + to
 	timeoutId = setTimeout(run, to)
-	
+
 	return {
 		stopCron : function()
 		{
