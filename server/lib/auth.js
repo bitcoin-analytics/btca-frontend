@@ -1,30 +1,23 @@
-var	user = require('./user')
-,	authLog = require('./log').openLog('auth')
-,	util = require('util')
-, config = require('./config')
-, ExpressOIDC = require('@okta/oidc-middleware').ExpressOIDC
+'use strict'
+const user = require('./user')
+	, authLog = require('./log').openLog('auth')
+	, util = require('util')
+	, { ExpressOIDC } = require('@okta/oidc-middleware')
 
 const redirect = (res, url) => {
-	res.writeHead(301, {'Location' : url })
+	res.writeHead(301, {'Location': url})
 	res.end()
 }
 
-exports.findOrCreateUser = function(session, userMetadata)
-{
-	//console.log("authentication ok", session)
-	if (!userMetadata) return
-
-	authLog.log(util.inspect(userMetadata))
-	session.userId = userMetadata.userinfo.sub
+function findOrCreateUser(session) {
+	const userinfo = session.passport.user.userinfo
+	session.userId = userinfo.sub
 	session.save()
-	var profile = user.profile( session.userId )
-	//console.log(profile)
-	//console.log(session.userId)
-	//console.log(util.inspect(userMetadata, true, 1000, true))
+	const profile = user.profile(session.userId)
 
 	if (typeof profile.nickname != 'string')
 	{
-		profile.nickname = userMetadata.userinfo.name
+		profile.nickname = userinfo.name
 		profile.save()
 		authLog.log({claimedIdentifier : session.userId, nickname : profile.nickname, category: 'auth_ok'})
 	}
@@ -43,7 +36,7 @@ exports.handleAuthCallbackError = function(req, res)
 		data.req.session.save()
 	}catch(e){
 	}
-	redirect(res, 'http://'+config.httpHostname+'/')
+	redirect(res, '/')
 }
 
 exports.handleAuthModuleError = function(err, data)
@@ -54,31 +47,35 @@ exports.handleAuthModuleError = function(err, data)
 		//console.log(util.inspect(err, true, 1000, true))
 		data.req.session.everyauthAuthError = {message : 'Authentication failed. Timeout reached during authenitcation, please try later.'}
 		data.req.session.save()
-		redirect(data.res, 'http://'+config.httpHostname+'/')
+		redirect(data.res, '/')
 	}catch(e){
 		console.error(e)
 	}
 }
 
-exports.initializeOIDC = () => {
-	const oidc = new ExpressOIDC({
-		scope: 'openid profile',
-		appBaseUrl: 'http://localhost:3000',
-		issuer: 'https://dev-025d9prn.us.auth0.com',
-		routes: {
-			loginCallback: { path: '/authorization-code/callback' }
-		},
-		client_id: '1',
-		client_secret: '2'
-	})
+const oidc = new ExpressOIDC({
+	scope: 'openid profile',
+	appBaseUrl: 'http://localhost:3000',
+	issuer: 'https://dev-025d9prn.us.auth0.com',
+	routes: {
+		loginCallback: {
+			path: '/authorization-code/callback',
+			handler: (req, res, next) => {
+				findOrCreateUser(req.session)
+				next()
+			},
+		}
+	},
+	client_id: '1',
+	client_secret: '2'
+})
 
-	oidc.on('ready', () => {
-		console.log('oidc start')
-	})
+oidc.on('ready', () => {
+	console.log('oidc start')
+})
 
-	oidc.on('error', err => {
-		console.log('error', err)
-	})
+oidc.on('error', err => {
+	console.log('error', err)
+})
 
-	return oidc
-}
+exports.router = oidc.router

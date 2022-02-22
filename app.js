@@ -2,7 +2,7 @@ console.error("appJs")
 var	ss = require('socketstream')
 ,	fs = require('fs')
 ,	express = require('express')
-,	{ initializeOIDC } = require('./server/lib/auth')
+,	auth = require('./server/lib/auth')
 var bodyParser = require('body-parser')
 var morgan = require('morgan')
 
@@ -42,8 +42,7 @@ let socketIoRequestHandler = null
 
 function routes(app)
 {
-	const oidc = initializeOIDC()
-	app.use(oidc.router)
+	app.use(auth.router)
 
 /*
 	app.get('/billing/blockchain/notify', billingBlockchain.notify(user.onPayment))
