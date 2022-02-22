@@ -197,7 +197,7 @@ exports.startPollAccountForExpiration = function()
 		})
 	)
 
-	exports.refreshArbitrageAlertsList()
+	// exports.refreshArbitrageAlertsList()
 
 	return usersDbLoadedReady.promise
 }

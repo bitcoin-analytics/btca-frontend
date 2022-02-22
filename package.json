@@ -36,6 +36,8 @@
   },
   "devDependencies": {
     "eslint": "^5.16.0",
-    "htmllint-cli": "0.0.7"
+    "hijack": "^0.1.0",
+    "htmllint-cli": "0.0.7",
+    "timekeeper": "^2.2.0"
   }
 }
