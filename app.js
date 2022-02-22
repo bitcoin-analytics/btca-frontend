@@ -50,7 +50,6 @@ function routes(app)
 */
 	app.get('/', function (req, res)
 	{
-		console.log('root')
 		res.serveClient('main')
 	})
 	app.all('/engine.io/*', (req, res, next) => socketIoRequestHandler(req, res, next))
@@ -73,7 +72,6 @@ ss.start(server)
 const ioRequestListener = server.listeners('request')
 
 socketIoRequestHandler = function (req, res) {
-	console.log('socketIoRequestHandler', req.url)
 	ioRequestListener.forEach(function (listener) {
 		listener.call(server, req, res)
 	})
